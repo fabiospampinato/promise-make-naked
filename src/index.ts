@@ -1,15 +1,15 @@
 
 /* IMPORT */
 
-import {PromiseResolve, PromiseReject, Result} from './types';
-import {NOOP} from './consts';
+import {NOOP} from './constants';
+import type {PromiseResolve, PromiseReject, Result} from './types';
 
-/* PROMISE MAKE NAKED */
+/* MAIN */
 
 const makeNakedPromise = <T> (): Result<T> => {
 
-  let resolve: PromiseResolve<T> = NOOP,
-      reject: PromiseReject = NOOP;
+  let resolve: PromiseResolve<T> = NOOP;
+  let reject: PromiseReject = NOOP;
 
   const promise = new Promise<T> ( ( res, rej ): void => {
     resolve = res;

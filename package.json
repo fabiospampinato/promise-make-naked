@@ -1,35 +1,27 @@
 {
   "name": "promise-make-naked",
+  "repository": "github:fabiospampinato/promise-make-naked",
   "description": "A simple function that makes a promise that can be resolved or rejected from the outside.",
   "version": "1.0.0",
+  "type": "module",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "exports": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "clean": "rimraf dist",
-    "compile": "tsc --skipLibCheck && tstei",
-    "compile:watch": "tsc --skipLibCheck --watch",
-    "prepublishOnly": "npm run clean && npm run compile"
-  },
-  "bugs": {
-    "url": "https://github.com/fabiospampinato/promise-make-naked/issues"
-  },
-  "license": "MIT",
-  "author": {
-    "name": "Fabio Spampinato",
-    "email": "spampinabio@gmail.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/fabiospampinato/promise-make-naked.git"
+    "clean": "tsex clean",
+    "compile": "tsex compile",
+    "compile:watch": "tsex compile --watch",
+    "test": "tsex test",
+    "test:watch": "tsex test --watch",
+    "prepublishOnly": "npm run clean && npm run compile && npm run test"
   },
   "keywords": [
     "promise",
     "naked"
   ],
-  "dependencies": {},
   "devDependencies": {
-    "rimraf": "^3.0.0",
-    "typescript": "^3.5.3",
-    "typescript-transform-export-interop": "^1.0.2"
+    "fava": "^0.0.6",
+    "tsex": "^1.1.0",
+    "typescript": "^4.6.3"
   }
 }

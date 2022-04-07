@@ -1,9 +1,9 @@
 
-/* TYPES */
+/* MAIN */
 
 type PromiseResolve <T> = ( value: T | PromiseLike<T> ) => void;
 
-type PromiseReject = ( reason?: any ) => void;
+type PromiseReject = ( reason?: unknown ) => void;
 
 type Result <T> = {
   promise: Promise<T>,
@@ -13,4 +13,4 @@ type Result <T> = {
 
 /* EXPORT */
 
-export {PromiseResolve, PromiseReject, Result};
+export type {PromiseResolve, PromiseReject, Result};
