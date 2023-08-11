@@ -8,7 +8,10 @@ type PromiseReject = ( reason?: unknown ) => void;
 type Result <T> = {
   promise: Promise<T>,
   resolve: PromiseResolve<T>,
-  reject: PromiseReject
+  reject: PromiseReject,
+  isPending: () => boolean,
+  isResolved: () => boolean,
+  isRejected: () => boolean
 };
 
 /* EXPORT */
