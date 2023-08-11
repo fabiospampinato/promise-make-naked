@@ -29,7 +29,7 @@ describe ( 'makeNakedPromise', it => {
 
   });
 
-  it ( 'returns a function which can be used to check if the promise is pending, resolve branch', async t => {
+  it ( 'returns a function which can be used to check if the promise is pending, resolve branch', t => {
 
     const {resolve, isPending} = makeNakedPromise ();
 
@@ -37,27 +37,25 @@ describe ( 'makeNakedPromise', it => {
 
     resolve ();
 
-    await delay ( 50 );
-
     t.false ( isPending () );
 
   });
 
-  it ( 'returns a function which can be used to check if the promise is pending, reject branch', async t => {
+  it ( 'returns a function which can be used to check if the promise is pending, reject branch', t => {
 
-    const {reject, isPending} = makeNakedPromise ();
+    const {promise, reject, isPending} = makeNakedPromise ();
+
+    promise.catch ( () => {} );
 
     t.true ( isPending () );
 
     reject ();
 
-    await delay ( 50 );
-
     t.false ( isPending () );
 
   });
 
-  it ( 'returns a function which can be used to check if the promise is resolved, resolve branch', async t => {
+  it ( 'returns a function which can be used to check if the promise is resolved, resolve branch', t => {
 
     const {resolve, isResolved} = makeNakedPromise ();
 
@@ -65,27 +63,25 @@ describe ( 'makeNakedPromise', it => {
 
     resolve ();
 
-    await delay ( 50 );
-
     t.true ( isResolved () );
 
   });
 
-  it ( 'returns a function which can be used to check if the promise is resolved, reject branch', async t => {
+  it ( 'returns a function which can be used to check if the promise is resolved, reject branch', t => {
 
-    const {reject, isResolved} = makeNakedPromise ();
+    const {promise, reject, isResolved} = makeNakedPromise ();
+
+    promise.catch ( () => {} );
 
     t.false ( isResolved () );
 
     reject ();
 
-    await delay ( 50 );
-
     t.false ( isResolved () );
 
   });
 
-  it ( 'returns a function which can be used to check if the promise is rejected, resolve branch', async t => {
+  it ( 'returns a function which can be used to check if the promise is rejected, resolve branch', t => {
 
     const {resolve, isRejected} = makeNakedPromise ();
 
@@ -93,21 +89,19 @@ describe ( 'makeNakedPromise', it => {
 
     resolve ();
 
-    await delay ( 50 );
-
     t.false ( isRejected () );
 
   });
 
-  it ( 'returns a function which can be used to check if the promise is rejected, reject branch', async t => {
+  it ( 'returns a function which can be used to check if the promise is rejected, reject branch', t => {
 
-    const {reject, isRejected} = makeNakedPromise ();
+    const {promise, reject, isRejected} = makeNakedPromise ();
+
+    promise.catch ( () => {} );
 
     t.false ( isRejected () );
 
     reject ();
-
-    await delay ( 50 );
 
     t.true ( isRejected () );
 

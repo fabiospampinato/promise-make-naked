@@ -15,11 +15,18 @@ const makeNakedPromise = <T> (): Result<T> => {
   let rejected = false;
 
   const promise = new Promise<T> ( ( res, rej ): void => {
-    resolve = res;
-    reject = rej;
-  });
 
-  promise.then ( () => resolved = true, () => rejected = true );
+    resolve = value => {
+      resolved = true;
+      return res ( value );
+    };
+
+    reject = value => {
+      rejected = true;
+      return rej ( value );
+    };
+
+  });
 
   const isPending = (): boolean => !resolved && !rejected;
   const isResolved = (): boolean => resolved;
