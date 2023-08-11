@@ -3,15 +3,15 @@
 
 import {describe} from 'fava';
 import {setTimeout as delay} from 'node:timers/promises';
-import promiseMakeNaked from '../dist/index.js';
+import makeNakedPromise from '../dist/index.js';
 
 /* MAIN */
 
-describe ( 'promiseMakeNaked', it => {
+describe ( 'makeNakedPromise', it => {
 
   it ( 'returns a function which can be resolved from the outside', t => {
 
-    const {promise, resolve} = promiseMakeNaked ();
+    const {promise, resolve} = makeNakedPromise ();
 
     promise.then ( t.pass );
 
@@ -21,7 +21,7 @@ describe ( 'promiseMakeNaked', it => {
 
   it ( 'returns a function which can be rejected from the outside', t => {
 
-    const {promise, reject} = promiseMakeNaked ();
+    const {promise, reject} = makeNakedPromise ();
 
     promise.catch ( t.pass );
 
@@ -31,7 +31,7 @@ describe ( 'promiseMakeNaked', it => {
 
   it ( 'returns a function which can be used to check if the promise is pending, resolve branch', async t => {
 
-    const {resolve, isPending} = promiseMakeNaked ();
+    const {resolve, isPending} = makeNakedPromise ();
 
     t.true ( isPending () );
 
@@ -45,7 +45,7 @@ describe ( 'promiseMakeNaked', it => {
 
   it ( 'returns a function which can be used to check if the promise is pending, reject branch', async t => {
 
-    const {reject, isPending} = promiseMakeNaked ();
+    const {reject, isPending} = makeNakedPromise ();
 
     t.true ( isPending () );
 
@@ -59,7 +59,7 @@ describe ( 'promiseMakeNaked', it => {
 
   it ( 'returns a function which can be used to check if the promise is resolved, resolve branch', async t => {
 
-    const {resolve, isResolved} = promiseMakeNaked ();
+    const {resolve, isResolved} = makeNakedPromise ();
 
     t.false ( isResolved () );
 
@@ -73,7 +73,7 @@ describe ( 'promiseMakeNaked', it => {
 
   it ( 'returns a function which can be used to check if the promise is resolved, reject branch', async t => {
 
-    const {reject, isResolved} = promiseMakeNaked ();
+    const {reject, isResolved} = makeNakedPromise ();
 
     t.false ( isResolved () );
 
@@ -87,7 +87,7 @@ describe ( 'promiseMakeNaked', it => {
 
   it ( 'returns a function which can be used to check if the promise is rejected, resolve branch', async t => {
 
-    const {resolve, isRejected} = promiseMakeNaked ();
+    const {resolve, isRejected} = makeNakedPromise ();
 
     t.false ( isRejected () );
 
@@ -101,7 +101,7 @@ describe ( 'promiseMakeNaked', it => {
 
   it ( 'returns a function which can be used to check if the promise is rejected, reject branch', async t => {
 
-    const {reject, isRejected} = promiseMakeNaked ();
+    const {reject, isRejected} = makeNakedPromise ();
 
     t.false ( isRejected () );
 
@@ -110,6 +110,27 @@ describe ( 'promiseMakeNaked', it => {
     await delay ( 50 );
 
     t.true ( isRejected () );
+
+  });
+
+  it ( 'supports wrapping an arbitrary function', async t => {
+
+    const promise = makeNakedPromise.wrap ( async result => {
+
+      t.true ( result.promise instanceof Promise );
+      t.true ( typeof result.resolve === 'function' );
+      t.true ( typeof result.reject === 'function' );
+      t.true ( typeof result.isPending === 'function' );
+      t.true ( typeof result.isResolved === 'function' );
+      t.true ( typeof result.isRejected === 'function' );
+
+      await delay ( 50 );
+
+      result.resolve ( 123 );
+
+    });
+
+    t.is ( await promise, 123 );
 
   });
 

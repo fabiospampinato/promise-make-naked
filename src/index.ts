@@ -29,6 +29,18 @@ const makeNakedPromise = <T> (): Result<T> => {
 
 };
 
+/* UTILITIES */
+
+makeNakedPromise.wrap = async <T> ( fn: ( result: Result<T> ) => void ): Promise<T> => {
+
+  const result = makeNakedPromise<T> ();
+
+  await fn ( result );
+
+  return result.promise;
+
+};
+
 /* EXPORT */
 
 export default makeNakedPromise;
