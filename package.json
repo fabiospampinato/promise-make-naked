@@ -2,7 +2,7 @@
   "name": "promise-make-naked",
   "repository": "github:fabiospampinato/promise-make-naked",
   "description": "A simple function that makes a promise that can be resolved or rejected from the outside.",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "type": "module",
   "main": "dist/index.js",
   "exports": "./dist/index.js",
