@@ -51,3 +51,4 @@ makeNakedPromise.wrap = async <T> ( fn: ( result: Result<T> ) => void ): Promise
 /* EXPORT */
 
 export default makeNakedPromise;
+export type {Result};
