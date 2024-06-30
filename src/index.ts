@@ -1,15 +1,15 @@
 
 /* IMPORT */
 
-import {NOOP} from './constants';
+import {noop} from './utils';
 import type {PromiseResolve, PromiseReject, Result} from './types';
 
 /* MAIN */
 
 const makeNakedPromise = <T> (): Result<T> => {
 
-  let resolve: PromiseResolve<T> = NOOP;
-  let reject: PromiseReject = NOOP;
+  let resolve: PromiseResolve<T> = noop;
+  let reject: PromiseReject = noop;
 
   let resolved = false;
   let rejected = false;
@@ -33,18 +33,6 @@ const makeNakedPromise = <T> (): Result<T> => {
   const isRejected = (): boolean => rejected;
 
   return {promise, resolve, reject, isPending, isResolved, isRejected};
-
-};
-
-/* UTILITIES */
-
-makeNakedPromise.wrap = async <T> ( fn: ( result: Result<T> ) => void ): Promise<T> => {
-
-  const result = makeNakedPromise<T> ();
-
-  await fn ( result );
-
-  return result.promise;
 
 };
 
