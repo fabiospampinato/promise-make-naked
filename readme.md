@@ -1,6 +1,6 @@
 # Promise Make Naked
 
-A simple function that makes a promise that can be resolved or rejected from the outside.
+A simple function that makes a promise that can be resolved, rejected or introspected from the outside.
 
 ## Install
 
