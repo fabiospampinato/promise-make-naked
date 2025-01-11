@@ -3,7 +3,7 @@
   "repository": "github:fabiospampinato/promise-make-naked",
   "description": "A simple function that makes a promise that can be resolved, rejected or introspected from the outside.",
   "license": "MIT",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "type": "module",
   "main": "dist/index.js",
   "exports": "./dist/index.js",
