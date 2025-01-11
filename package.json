@@ -17,7 +17,8 @@
   },
   "keywords": [
     "promise",
-    "naked"
+    "naked",
+    "resolvers"
   ],
   "devDependencies": {
     "fava": "^0.3.2",

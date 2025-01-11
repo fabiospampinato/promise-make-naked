@@ -28,9 +28,9 @@ const makeNakedPromise = <T> (): Result<T> => {
 
   });
 
-  const isPending = (): boolean => !resolved && !rejected;
-  const isResolved = (): boolean => resolved;
-  const isRejected = (): boolean => rejected;
+  const isPending = () => !resolved && !rejected;
+  const isResolved = () => resolved;
+  const isRejected = () => rejected;
 
   return {promise, resolve, reject, isPending, isResolved, isRejected};
 

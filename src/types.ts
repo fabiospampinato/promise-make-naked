@@ -1,7 +1,7 @@
 
 /* MAIN */
 
-type PromiseResolve <T> = ( value: T | PromiseLike<T> ) => void;
+type PromiseResolve<T> = ( value: T | PromiseLike<T> ) => void;
 
 type PromiseReject = ( reason?: unknown ) => void;
 
