@@ -5,7 +5,7 @@ A simple function that makes a promise that can be resolved, rejected or introsp
 ## Install
 
 ```sh
-npm install --save promise-make-naked
+npm install promise-make-naked
 ```
 
 ## Usage
